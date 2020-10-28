@@ -1,0 +1,73 @@
+<html>
+<head>
+<script language = "JavaScript">
+var answers = ["Your wish will come true.", "It is uncertain.", "It is best not to answer.", "Perhaps.", "Say your prayers...", "There is a high chance of it.", "Be prepared for what happens.", "It is certain.", "It is likely.", "Of course."];
+
+  
+function random()
+{
+  var rand = -1;
+    var solution=document.getElementById("answer");
+    var userQ=document.getElementById("question");
+   
+    //rand = Math.random();//returns a random decimal between 0 (inclusive) and 1 (exclusive)    
+   //multiply Math.random() by the NUMBER OF OPTIONS
+   rand = Math.random() * answers.length;
+   rand = Math.floor(rand);
+   
+    
+    if(userQ.value.length == 0) // User hasn't asked a question
+    {
+        solution.value = "Please ask a question first."     
+    }
+    else
+    {
+        solution.value = answers[rand];    
+        if( rand == 4)
+        {
+         document.getElementById("player").play();
+        }
+}
+}
+    
+function reset()
+{
+    //delete the contents of the answer text box
+    document.getElementById("answer").value = "";
+    
+}
+        
+    
+
+</script>
+</head>
+<body background="images/8ballbkgnd.gif" vlink = "white"> <font color = "white">
+<center>
+<h1>Magic 8 Ball</h1>
+    <br/>
+    <br/>
+    <center>
+<img src="images/8ball.jpg" width=300/>
+    </center>
+    <br/>
+
+    <input id = "question" type = “text” size=”80” onfocusin = "reset()"/>
+    <br/>
+    <br/>
+   <input type="button" value="Click here" onClick="random()"/>
+     <br/>
+    <br/>
+    <input id = "answer" type = “text” size=”80” readonly = true/>
+    <b/>
+    <p> Type out your question in the first box. Press the button. Your answer will appear in the second.  </p>
+    
+    <audio src="sounds/sad.mp3" id="player"> </audio>
+    <b/>
+    <b/>
+    <b/>
+    <p> Click here to go back <a href="index.html">to my main page.</a>
+</center>
+</body>
+</html>
+
+
