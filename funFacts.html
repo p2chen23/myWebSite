@@ -1,0 +1,94 @@
+<html> 
+<head> 
+<script language="JavaScript">
+
+/*************** Algorithm ******************
+1. Write the facts and corresponding states into two lists.   
+2. Have the states and facts corresponding as the same number in the list.  
+3. Connect the lists with the table by calling the variable(?)
+4. Display the elements in the list in the table.  
+5. Allow the user to press the part of the table with the drop down menu, but not the other.  
+6. Use some kind of statement or some other function to call the corresponding fun fact
+7. Have the button trigger a function to have the text box fill with the corresponding information called
+
+*/
+
+
+var group = ["-- Choose a State --", "California", "New York", "Texas", "New Jersey", "Kentucky", "Oregon", "Georgia", "Florida"];
+
+var facts = ["-- No state selected --", "The Golden State", "The Empire State", "The Lone Star State", "The Garden State", "Bluegrass State", "Beaver State", "Empire State of the South", "The Sunshine State"];
+
+function loadData() //fills in the drop down for the select object
+{
+	var sum = 0;
+	for(var i = 0; i<group.length; i++)
+    {
+        var daList = document.getElementById("prez");
+  		var option = document.createElement("option");
+  		option.text = group[i];
+  		daList.add(option);
+    }
+}
+
+// This function identifies which element from the drop down has been selected. It calls the
+// getIndex function to acquire what the index of the selected item. Then it displays the 
+// corresponding element in the facts list. (This is displayed in the textbox on the web page.)
+function start()
+{
+	// Code that stores the select object in the variable states
+    var states = document.getElementById("prez");
+    var daIndex = getIndex(states.value);
+    //states.value is the element that was selected
+    //Code that displays the element at daIndex in the facts array in       the textbox called funFact
+    if( daIndex > -1) //valid selection
+    {
+        /*var response = document.getElementById("funFact");
+        response.value = facts[daIndex]; */
+        
+        document.getElementById("funFact").value = facts[daIndex];
+    }    
+    else //invalid
+    {
+     alert("Invalid Selection");   
+    }   
+}
+
+// This function searches the group array for the element passed as a parameter
+// and returns the index number for that element in the array.
+function getIndex(d)
+{
+    var answer = -1; //invalid index in array
+    
+    for( var i = 0 ; i < group.length ; i++ )
+    {
+          if(group[i] == d) // tests if the element at i equals the parameter 
+            {
+               answer = i;
+            }    
+    }    
+    return answer;
+}
+
+
+
+</script>
+</head>
+<body onload="loadData()" bgcolor="lightblue" vlink="red"> 
+<center>
+<h1>US State Fun Facts</h1>
+Click here <a href="index.html"> to return to my home page. </a><br/>
+
+<br/><br/>
+<table border = 3>
+	<tr>
+		<td>  	<select name="p1" id="prez"></select>	</td>
+		<td>	<input id="funFact" type="text" size="40"/> </td>
+	</tr>
+</table>
+<br/><br/>
+<input type="button" value="click" onclick="start()"/>
+</center>
+
+
+</body>
+</html>
