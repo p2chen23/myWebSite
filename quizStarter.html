@@ -1,0 +1,110 @@
+<html> 
+<head> 
+<script language="JavaScript">
+
+/*************** Algorithm ******************
+1. Write questions along with multiple choice answers.  
+2. Put the questions and answers in corresponding arrays so that they  have the same index number.  
+3. Create two text boxes, one where you can only read, which displays the question, and the other where the user types out their answer.  
+4. Create a button that the user presses when they finish typing their answer.  
+5. The button calls a function that retrieves the user's answer and checks if it is true or false. 
+6. Display an alert depending on the accuracy of the answer, and increase the score variable if it is correct.  
+7. The button should also display the contents of the next question, perhaps after the alert is resolved.  
+8. After all of the questions have been run through, display the first question again.  
+
+*/
+
+
+var questions = ["What is the capital of Tennessee?", "What is the full name of DNA?", "What is the capital of Spain?", "What is the planet second-closest to the sun?", "What is the capital of Canada?", "What year did Columbus set foot on the Americas?", "What is the capital of Russia?", "What city did the 2012 Summer Olympics take place in?", "What is the capital of Japan?", "What is the largest of the 50 U.S. states?"]; // Create an array of 10ish questions.
+
+var answers = ["NASHVILLE", "DEOXYRIBONUCLEIC ACID", "MADRID", "VENUS", "OTTAWA", "1492", "MOSCOW", "LONDON", "TOKYO", "ALASKA"]; // Create an array of the cooresponding answers to the questions above.  
+
+var index = -1;
+
+var score = 0;
+
+
+// Create code in displayQuestion that will display the contents of the questions array, one 
+// element at a time. After the last element is displayed, the program should display the first
+// element again.
+function displayQuestion()
+{
+    
+   if(index < questions.length - 1)
+        {     
+         document.getElementById("answer").removeAttribute('readonly','readonly');   
+         index = index + 1;
+         document.getElementById("question").value = questions[index];
+         document.getElementById("answer").value = "";        
+        }
+   
+    else //invalid
+    {
+     alert("Finished!  Resetting Quiz and Score...");    
+     index = index - answers.length;     
+     score = 0;   
+    }    
+}
+
+
+// This function will first acquire the user's answer (from the textbox with the ID "answer". Then this function will pass that to the checkAnswer function (note: that there is a parameter.) The checkAnswer will return a true or a false. If that function returns true, then the score variable will increase by 1, and an alert should pop up saying "Correct" or something positive. If the checkAnswer function comes back false, then score doesn't increase but an alert should announce "incorrect." or something similar. 
+function updateScore()
+{     
+   document.getElementById("answer").setAttribute('readonly','readonly');    
+   var name = document.getElementById("answer"); 
+   var maybe = checkAnswer(name.value);
+   alert(maybe); 
+   if(maybe == "Correct!")
+     {
+       score++;
+     }
+   else
+   {
+    score = score;   
+   }    
+    alert('Score: ' + score);   
+}
+
+// This function takes a parameter which will be the users answer. If what the user has submitted the correct answer, this method should return true. Otherwise it should return false. 
+function checkAnswer(ans)
+{    
+   var hello = -1 
+   
+if(ans == answers[index])
+   { 
+      hello = "Correct!";
+   }  
+    else
+    {
+      hello = "Incorrect";   
+    }          
+    return hello;
+}
+
+
+
+</script>
+</head>
+<body> 
+<center>
+<h1>My Quiz</h1>
+    Click here <a href="index.html"> to return to my home page. </a>
+
+<br/><br/>
+<table border = 3>
+	<tr>
+		<td>  	<input id="question" type="text" size="70" readonly = true/>	</td>
+	</tr>
+	<tr height = "12"><td></td>
+	</tr>
+	<tr>
+		<td>	<input id="answer" type="text" size="70" onfocusout="updateScore()" oninput="this.value = this.value.toUpperCase()"/> </td>
+	</tr>
+</table>
+<br/><br/>
+<input type="button" value="Next Question" onclick="displayQuestion()"/>
+</center>
+
+
+</body>
+</html>
